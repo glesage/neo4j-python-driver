@@ -158,21 +158,6 @@ class GraphDatabase:
                     ]
                 ))
 
-        if security_type in [SECURITY_TYPE_SELF_SIGNED_CERTIFICATE, SECURITY_TYPE_SECURE] and ("encrypted" in config.keys() or "trust" in config.keys()):
-            from neo4j.exceptions import ConfigurationError
-            raise ConfigurationError("The config settings 'encrypted' and 'trust' can only be used with the URI schemes {!r}. Use the other URI schemes {!r} for setting encryption settings.".format(
-                [
-                    URI_SCHEME_BOLT,
-                    URI_SCHEME_NEO4J,
-                ],
-                [
-                    URI_SCHEME_BOLT_SELF_SIGNED_CERTIFICATE,
-                    URI_SCHEME_BOLT_SECURE,
-                    URI_SCHEME_NEO4J_SELF_SIGNED_CERTIFICATE,
-                    URI_SCHEME_NEO4J_SECURE,
-                ]
-            ))
-
         if security_type == SECURITY_TYPE_SECURE:
             config["encrypted"] = True
         elif security_type == SECURITY_TYPE_SELF_SIGNED_CERTIFICATE:
